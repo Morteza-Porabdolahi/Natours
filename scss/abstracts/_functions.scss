@@ -1,0 +1,3 @@
+@function calcColumnWidth($colSpan, $totalCol) {
+  @return calc(#{$colSpan} * ((100% - #{$totalCol - 1} * #{$gutter-horizontal}) / #{$totalCol}) + #{$colSpan - 1} * #{$gutter-horizontal});
+}

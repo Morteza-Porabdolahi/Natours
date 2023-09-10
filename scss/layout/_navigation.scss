@@ -1,0 +1,163 @@
+.navigation {
+  &__icon {
+    position: relative;
+    @include centerTwoAxis;
+    
+    &,&::after ,&::before{
+      width: 3rem;
+      height: 2px;
+      display: inline-block;
+      background-color: $color-gray-dark-3;
+    }
+
+    &::after,&::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      transition: top .2s, rotate .2s;
+    }
+
+    &::before {
+      top: -.8rem;
+    }
+
+    &::after {
+      top: .8rem;
+    }
+  }
+  
+  &__checkbox {
+    display: none;
+  } 
+
+  &__checkbox:checked ~ &__nav {
+    width: 100%;
+    opacity: 1;
+  } 
+
+  &__checkbox:checked ~ &__background {
+    scale: 70;
+  } 
+
+  &__checkbox:checked + &__button > &__icon {
+    background-color: transparent;
+
+    &::before,&::after {
+      top: 0;
+      visibility: visible;
+    }
+
+    &::before {
+      rotate: 135deg;
+    }
+
+    &::after {
+      rotate: -135deg;
+    }
+  } 
+
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6rem;
+    z-index: 3;
+    right: 6rem;
+    box-shadow: $shadow-sm;
+    cursor: pointer;
+
+    @include respond('tab-port') {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond('phone') {
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+
+  &__button:hover > &__icon {
+    &::before {
+      top: -1rem;
+    }
+    
+    &::after {
+      top: 1rem;
+    }
+  }
+
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient($color-primary-light, $color-primary-dark);
+    transition: scale .6s cubic-bezier(0.83, 0, 0.17, 1);
+    z-index: 1;
+
+    @include respond('tab-port') {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond('phone') {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
+  }
+
+  &__nav {
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    z-index: 2;
+    left: 0; 
+    opacity: 0;
+    overflow: hidden;
+    width: 0;
+    transition: all .6s cubic-bezier(.68, -.55, .265, 1.55);
+  }
+
+  &__list {
+    @include centerTwoAxis;
+    list-style: none;
+    text-align: center;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,&:visited {
+      font-size: 3rem;
+      font-weight: 300;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      background-image: linear-gradient(110deg, transparent 0 50%, rgba($color-white, .2) 50% 70%, transparent 70% 100%);
+      background-size: 20%;
+      background-position: 150%;
+      background-repeat: no-repeat;
+      transition: translate .4s,background-position .4s;
+      display: inline-block;
+      
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,&:active {
+      background-position: -40%;
+      translate: 1rem 0;
+    }
+
+  }
+}
